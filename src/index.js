@@ -1,28 +1,6 @@
 const xwing = require('../yasb2-data/xwing');
 const _ = require('lodash');
 
-// { unreleasedExpansions: [],
-//   isReleased: [Function],
-//   hugeOnly: [Function],
-//   basicCardData: [Function],
-//   setupCardData: [Function],
-//   fixIcons: [Function],
-//   canonicalizeShipNames: [Function],
-//   renameShip: [Function],
-//   randomizer: [Function],
-//   codeToLanguage: { en: 'English' },
-//   translations:
-//    { English:
-//       { action: [Object],
-//         sloticon: [Object],
-//         slot: [Object],
-//         sources: [Object],
-//         ui: [Object],
-//         byCSSSelector: [Object],
-//         singular: [Object],
-//         types: [Object] } },
-//   cardLoaders: { English: [Function] } }
-
 const basicCardData = xwing.basicCardData();
 const shipsByName = _.transform(basicCardData.ships, (all, ship) => {
   all[ship.name] = ship;
@@ -111,7 +89,3 @@ const pilotPointEfficiency = pilot => {
 const efficiency = _.sortBy(pilotedShips.map(pilotPointEfficiency), 'value');
 
 console.log(efficiency.reverse())
-
-// console.log(Object.keys(basicCardData));
-// console.log(basicCardData.pilotsById);
-// console.log(pilotedShips);
