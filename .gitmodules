@@ -1,0 +1,3 @@
+[submodule "yasb2"]
+	path = yasb2
+	url = git@github.com:jcavanagh/xwing.git

@@ -1,0 +1,18 @@
+{
+  "name": "xwing2stats",
+  "version": "1.0.0",
+  "description": "Unclear",
+  "main": "src/index.js",
+  "bin": {
+    "xwstats": "src/index.js"
+  },
+  "engines": {
+    "node": "10.6.0"
+  },
+  "scripts": {
+    "build": "rm -rf yasb2-data && cd yasb2 && npx grunt rawdata && cp -r data ../yasb2-data"
+  },
+  "dependencies": {
+    "lodash": "^4.17.10"
+  }
+}
