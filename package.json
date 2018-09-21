@@ -1,18 +1,16 @@
 {
-  "name": "xwing2stats",
+  "name": "@xws/xws",
+  "description": "X-Wing Stats",
+  "private": true,
   "version": "1.0.0",
-  "description": "Unclear",
-  "main": "src/index.js",
-  "bin": {
-    "xwstats": "src/index.js"
-  },
-  "engines": {
-    "node": "10.6.0"
-  },
   "scripts": {
-    "build": "rm -rf yasb2-data && cd yasb2 && npx grunt rawdata && cp -r data ../yasb2-data"
+    "build-data": "cd yasb2 && npx grunt rawdata && cp -r data ../packages/xws-data",
+    "build": "lerna run build",
+    "deploy": "npm run build && gh-pages -d dist",
+    "postinstall": "lerna bootstrap --hoist",
+    "start": "cd ./packages/xws-ui/ && node server.js"
   },
-  "dependencies": {
-    "lodash": "^4.17.10"
+  "devDependencies": {
+    "lerna": "^3.4.0"
   }
 }
