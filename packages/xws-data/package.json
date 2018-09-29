@@ -5,5 +5,10 @@
   "version": "1.0.0",
   "types": "src/index.d.ts",
   "main": "src/index.js",
-  "module": "src/index.js"
+  "module": "src/index.js",
+  "dependencies": {
+    "@types/fs-extra": "^5.0.4",
+    "fs-extra": "^7.0.0",
+    "xwing-data2": "https://github.com/guidokessels/xwing-data2.git"
+  }
 }

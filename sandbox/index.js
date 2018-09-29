@@ -1,19 +1,7 @@
 const xwing = require('../yasb2-data/xwing');
 const _ = require('lodash');
 
-const basicCardData = xwing.basicCardData();
-const shipsByName = _.transform(basicCardData.ships, (all, ship) => {
-  all[ship.name] = ship;
-}, {});
-const pilotedShips = basicCardData.pilotsById.filter(p => !p.skip).map(pilot => {
-  const ship = shipsByName[pilot.ship];
-  if(!ship) {
-    console.error(`No ship for name:${JSON.stringify(pilot)}`)
-  }
-  return { pilot, ship };
-});
-
-const BASE_ATTACK_WEIGHT = [ 0, 1, 2, 3, 4 ];
+const BASE_ATTACK_WEIGHT = [0, 1, 2, 3, 4];
 const WEIGHTS = {
   ship: {
     hull: 1,
@@ -21,10 +9,10 @@ const WEIGHTS = {
     attack: BASE_ATTACK_WEIGHT,
     attackt: BASE_ATTACK_WEIGHT.map(aw => aw * 1.2),
     attackdt: BASE_ATTACK_WEIGHT.map(aw => aw * 1.5),
-    agility: [ 0, 1, 2, 3, 4 ]
+    agility: [0, 1, 2, 3, 4]
   },
   pilot: {
-    force: 5,
+    force: 5
     // slots: {
 
     // }
@@ -41,25 +29,29 @@ const invalid = w => _.isNaN(w) || w == null;
 
 const weight = (pilot, weightKey) => {
   // console.log(pilot);
-  return _.reduce(WEIGHTS[weightKey], (w, val, key) => {
-    const pilotValue = _.get(pilot, [weightKey, key]);
-    if(invalid(pilotValue)) {
-      if (!key.includes('attack')) {
-        console.warn(`No pilot value for path: ${weightKey}, ${key}`, pilot);
+  return _.reduce(
+    WEIGHTS[weightKey],
+    (w, val, key) => {
+      const pilotValue = _.get(pilot, [weightKey, key]);
+      if (invalid(pilotValue)) {
+        if (!key.includes('attack')) {
+          console.warn(`No pilot value for path: ${weightKey}, ${key}`, pilot);
+        }
+        return w;
       }
-      return w;
-    }
-    const mult = _.isFunction(val) ? val(pilotValue) : _.isArray(val) ? val[pilotValue] : val;
-    if (invalid(mult)) {
-      if (!key.includes('attack')) {
-        console.warn(`No weight value for path: ${weightKey}, ${key}`, pilot);
+      const mult = _.isFunction(val) ? val(pilotValue) : _.isArray(val) ? val[pilotValue] : val;
+      if (invalid(mult)) {
+        if (!key.includes('attack')) {
+          console.warn(`No weight value for path: ${weightKey}, ${key}`, pilot);
+        }
+        return w;
       }
+      w = w + pilotValue * mult;
+      // console.log(key, pilotValue, mult, w);
       return w;
-    }
-    w = w + (pilotValue * mult);
-    // console.log(key, pilotValue, mult, w);
-    return w;
-  }, 0);
+    },
+    0
+  );
 };
 
 const shipValue = pilot => {
@@ -84,8 +76,8 @@ const pilotPointEfficiency = pilot => {
     faction: pilot.pilot.faction,
     value: value / points
   };
-}
+};
 
 const efficiency = _.sortBy(pilotedShips.map(pilotPointEfficiency), 'value');
 
-console.log(efficiency.reverse())
+console.log(efficiency.reverse());

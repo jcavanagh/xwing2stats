@@ -7,10 +7,14 @@
     "build-data": "cd yasb2 && npx grunt rawdata && cp -r data ../packages/xws-data",
     "build": "lerna run build",
     "deploy": "npm run build && gh-pages -d dist",
-    "postinstall": "lerna bootstrap --hoist",
+    "postinstall": "lerna bootstrap",
     "start": "cd ./packages/xws-ui/ && node server.js"
   },
   "devDependencies": {
-    "lerna": "^3.4.0"
+    "@types/lodash": "^4.14.116",
+    "@types/node": "^10.11.3",
+    "lerna": "^3.4.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.1"
   }
 }
