@@ -4,7 +4,6 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "build-data": "cd yasb2 && npx grunt rawdata && cp -r data ../packages/xws-data",
     "build": "lerna run build",
     "deploy": "npm run build && gh-pages -d dist",
     "postinstall": "lerna bootstrap",

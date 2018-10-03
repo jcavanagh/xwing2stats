@@ -1,19 +1,15 @@
 {
   "compilerOptions": {
-    "allowJs": true,
     "outDir": "dist",
     "sourceMap": true,
     "jsx": "react",
     // "strict": true,
     "removeComments": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
     "esModuleInterop": true,
     "composite": true,
     "baseUrl": "./packages"
-    // "paths": {
-    //   "@xws/*": ["./*/src"]
-    // }
   },
   "include": ["packages/**/*"],
   "exclude": ["node_modules"]

@@ -1,9 +1,12 @@
-import { ships } from '@xws/data';
+import { types, ships } from '@xws/data';
 import { observable, computed } from 'mobx';
 
 class Ships {
   @computed
-  all: xws.Ship[] = ships;
+  all: types.Ship[];
+  constructor() {
+    this.all = ships;
+  }
 }
 
 export default Ships;
